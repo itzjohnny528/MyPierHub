@@ -1,35 +1,43 @@
--- MyPierHub PRO by FishyJohnny
+-- MyPierHub GUI Script
+local library = loadstring(game:HttpGet("https://pastebin.com/raw/edJT9EGX"))() -- UiLib
+local w = library:CreateWindow("MyPierHub")
+local espTab = w:CreateFolder("ESP")
+local farmTab = w:CreateFolder("AutoFarm")
+local baitsTab = w:CreateFolder("Baits")
 
-local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/username/library/main/lib.lua"))()
+-- ESP toggle
+espTab:Toggle("Enable ESP", function(state)
+    if state then
+        print("ESP Enabled") -- replace with actual ESP logic
+    else
+        print("ESP Disabled")
+    end
+end)
 
-local window = library:CreateWindow("MyPierHub PRO")
+-- AutoFarm toggle
+farmTab:Toggle("Auto Fish", function(state)
+    if state then
+        print("AutoFish On") -- replace with actual autofarm logic
+    else
+        print("AutoFish Off")
+    end
+end)
 
--- Tabs
-local baitTab = window:CreateTab("Baits")
-local autoTab = window:CreateTab("AutoFarm")
-local espTab = window:CreateTab("ESP")
-local settingsTab = window:CreateTab("Settings")
-
--- Baits List
-local baitList = {
-    "Bread", "Insect", "Plankton Gel", "Shellfish", "Cybernetic Bait",
-    "Cryptic Relic", "Ancient Fossil", "Shark Bait", "Serpent Bait"
+-- Lista przynęt
+local baits = {
+    "Bread", "Worm", "Minnow", "Insect", "Cricket", "Shrimp", "Leech",
+    "Grub", "Frog", "Baitfish", "PowerBait", "Bloodworm", "Mealworm",
+    "Cutbait", "Artificial Fly", "Salmon Egg", "Corn", "Cheese", "Nightcrawler"
 }
-baitTab:CreateDropdown("Choose Bait", baitList, function(selected)
-    print("Selected bait:", selected)
+
+baitsTab:Dropdown("Select Bait", baits, function(selectedBait)
+    print("Selected bait:", selectedBait)
 end)
 
--- AutoFarm Toggle
-autoTab:CreateToggle("Auto Catch", false, function(value)
-    _G.autoCatch = value
-end)
+-- Notification
+game.StarterGui:SetCore("SendNotification", {
+    Title = "MyPierHub Loaded!",
+    Text = "GUI Initialized",
+    Duration = 5
+})
 
--- ESP
-espTab:CreateToggle("Show Fish ESP", false, function(state)
-    _G.showESP = state
-end)
-
--- Settings
-settingsTab:CreateButton("Destroy GUI", function()
-    library:Destroy()
-end)
